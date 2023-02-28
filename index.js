@@ -15,8 +15,13 @@ const { fifaData } = require('./fifa.js')
 //(d)2014 Dünya kupası finali Deplasman takım golleri  (dizide "Away Team Goals" anahtarı)
 
 //(e) 2014 Dünya kupası finali kazananı*/
-
-
+let dataDizisi = [];
+function filtreleme(yilDatasi){
+	let filtrelenmisData = fifaData.filter(yil => fifaData.Year === yilDatasi);
+	dataDizisi.push(filtrelenmisData);
+	return dataDizisi;
+}
+console.log(filtreleme(2004));
 /*  Görev 2: 
 	Finaller adlı fonksiyonu kullanarak aşağıdakileri uygulayın:
 	1. Bir dizi(array) olan Fifa datasını fonksiyonun birinci parametresi olarak alacak
@@ -25,10 +30,14 @@ const { fifaData } = require('./fifa.js')
 	💡 İPUCU - verilen data içindeki nesnelerin(objects) "Stage" anahtarına bakmalısınız
 */
 
-function Finaller(/* kodlar buraya */) {
+function Finaller(fonksiyonParam) {
 	
     /* kodlar buraya */
-}
+
+let finalData = fonksiyonParam.filter(match => match.Stage === "Final");
+
+return finalData;
+} console.log(Finaller(fifaData));
 
 
 
@@ -39,9 +48,10 @@ function Finaller(/* kodlar buraya */) {
 	3. Finaller data setindeki tüm yılları içeren "years" adındaki diziyi(array) döndürecek
 	*/
 
-function Yillar(/* kodlar buraya */) {
-	
+function Yillar(fonksiyonParam,callback) {
     /* kodlar buraya */
+let yeniDizi = [];
+
 }
 
 
