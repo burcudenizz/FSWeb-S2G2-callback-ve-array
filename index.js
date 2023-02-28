@@ -5,23 +5,31 @@ const { fifaData } = require('./fifa.js')
 	Verilen datayı parçalayarak aşağıdaki verileri (console.log-ing) elde ederek pratik yapın. 
 	
 	💡 İPUCU: Öncelikle datayı filtrelemek isteyebilirsiniz */
+const macFiltre = fifaData.filter((data) => data["Year"] ===2014);
+console.log(macFiltre);
 
 //(a) 2014 Dünya kupası Finali Evsahibi takım ismi (dizide "Home Team Name" anahtarı)
 
-//(b) 2014 Dünya kupası Finali Deplasman takım ismi  (dizide "Away Team Name" anahtarı)
+const finalEvSahibi = macFiltre.filter(data => data.Stage === "Final").map(data => data["Home Team Name"]);
+console.log(finalEvSahibi);
 
+//(b) 2014 Dünya kupası Finali Deplasman takım ismi  (dizide "Away Team Name" anahtarı)
+const finalDeplasman = macFiltre.filter(data => data.Stage === "Final").map(data => data["Away Team Name"]);
+console.log(finalDeplasman);
 //(c) 2014 Dünya kupası finali Ev sahibi takım golleri (dizide "Home Team Goals" anahtarı)
+const evTakimGolleri = macFiltre.filter(data => data.Stage === "Final").map(data => data["Home Team Goals"]);
+console.log(evTakimGolleri);
 
 //(d)2014 Dünya kupası finali Deplasman takım golleri  (dizide "Away Team Goals" anahtarı)
-
+const depTakimGolleri = macFiltre.filter(data => data.Stage === "Final").map(data => data["Away Team Goals"]);
+console.log(depTakimGolleri);
 //(e) 2014 Dünya kupası finali kazananı*/
-let dataDizisi = [];
-function filtreleme(yilDatasi){
-	let filtrelenmisData = fifaData.filter(yil => fifaData.Year === yilDatasi);
-	dataDizisi.push(filtrelenmisData);
-	return dataDizisi;
-}
-console.log(filtreleme(2004));
+const finalKazanani = macFiltre.filter(data => data.Stage === "Final")
+if( evTakimGolleri > depTakimGolleri){
+	console.log("Kazanan: " , finalEvSahibi);
+} else  {
+	console.log("Kazanan: " , finalDeplasman);
+} 
 /*  Görev 2: 
 	Finaller adlı fonksiyonu kullanarak aşağıdakileri uygulayın:
 	1. Bir dizi(array) olan Fifa datasını fonksiyonun birinci parametresi olarak alacak
@@ -34,7 +42,7 @@ function Finaller(fonksiyonParam) {
 	
     /* kodlar buraya */
 
-let finalData = fonksiyonParam.filter(match => match.Stage === "Final");
+let finalData = fonksiyonParam.filter((mac) => mac.Stage === "Final");
 
 return finalData;
 } console.log(Finaller(fifaData));
@@ -48,15 +56,12 @@ return finalData;
 	3. Finaller data setindeki tüm yılları içeren "years" adındaki diziyi(array) döndürecek
 	*/
 
-function Yillar(oneData,callback) {
+function Yillar(oneData,callbackIki) {
     /* kodlar buraya */
 let yeniDizi = []; 
-let yillarData = callback(oneData).map(final => yeniDizi.push(final.Year));
+let yillarData = callbackIki(oneData).map(final => yeniDizi.push(final.Year));
 return yeniDizi;
-} 
-
-
-
+}console.log( Yillar(fifaData,Finaller));
 
 
 /*  Görev 4: 
@@ -93,9 +98,9 @@ console.log(Kazananlar(fifaData,Finaller));
 	💡 İPUCU: her cümlenin adım 4'te belirtilen cümleyle birebir aynı olması gerekmektedir.
 */
 
-function YillaraGoreKazananlar(/* kodlar buraya */) {
-	
+function YillaraGoreKazananlar(oneData, gorevIki, gorevUc, gorevDort) {
 /* kodlar buraya */
+let donusDizi = [];
 
 }
 
