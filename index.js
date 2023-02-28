@@ -75,7 +75,7 @@ return yeniDizi;
 function Kazananlar(oneData, callback) {
     /* kodlar buraya */
 let ulkelerDizi = [];
-let ulkelerData = callback(oneData).map((kazanan) => { 
+let ulkelerData = callback(oneData).filter((kazanan) => { 
 	if(kazanan["Home Team Goals"] > kazanan["Away Team Goals"] ){
 		 ulkelerDizi.push(kazanan["Home Team Name"]);
 	} else if(kazanan["Home Team Goals"] < kazanan["Away Team Goals"] ) { 
@@ -98,11 +98,14 @@ console.log(Kazananlar(fifaData,Finaller));
 	💡 İPUCU: her cümlenin adım 4'te belirtilen cümleyle birebir aynı olması gerekmektedir.
 */
 
-function YillaraGoreKazananlar(oneData, gorevIki, gorevUc, gorevDort) {
-/* kodlar buraya */
-let donusDizi = [];
-
-}
+function YillaraGoreKazananlar(fifaDataYears, finallerYears, yillarYears, kazananlarYears) {
+	const result = yillarYears(fifaDataYears, finallerYears).map((year, index) => { 
+			return `${year} yılında, ${kazananlarYears(fifaDataYears, finallerYears)[index]} dünya kupasını kazandı!`;
+		});
+		return result;
+	}
+	
+	console.log(YillaraGoreKazananlar(fifaData, Finaller, Yillar, Kazananlar));
 
 
 /*  Görev 6: 
@@ -119,11 +122,20 @@ let donusDizi = [];
 	
 */
 
-function OrtalamaGolSayisi(/* kodlar buraya */) {
+function OrtalamaGolSayisi(finalScore) {
 	
-    /* kodlar buraya */
+	const totalScore = finalScore.reduce(
+		(total, endFinalScore) => 
+		  total + endFinalScore["Home Team Goals"] + endFinalScore["Away Team Goals"], 0
+		);
+	
+	console.log("totalScore", totalScore);
+	
+	return (totalScore / finalScore.length).toFixed(2);
 	
 }
+
+console.log(OrtalamaGolSayisi(Finaller(fifaData)));
 
 
 
