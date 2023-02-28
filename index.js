@@ -48,11 +48,15 @@ return finalData;
 	3. Finaller data setindeki tüm yılları içeren "years" adındaki diziyi(array) döndürecek
 	*/
 
-function Yillar(fonksiyonParam,callback) {
+function Yillar(oneData,callback) {
     /* kodlar buraya */
-let yeniDizi = [];
+let yeniDizi = []; 
+let yillarData = callback(oneData).map(final => yeniDizi.push(final.Year));
+return yeniDizi;
+} 
 
-}
+
+
 
 
 /*  Görev 4: 
@@ -63,12 +67,19 @@ let yeniDizi = [];
 	💡 İPUCU: Beraberlikler(ties) için şimdilik endişelenmeyin (Detaylı bilgi için README dosyasına bakabilirsiniz.)
 	4. Tüm kazanan ülkelerin isimlerini içeren `kazananlar` adında bir dizi(array) döndürecek(return)  */ 
 
-function Kazananlar(/* kodlar buraya */) {
-	
+function Kazananlar(oneData, callback) {
     /* kodlar buraya */
-	
+let ulkelerDizi = [];
+let ulkelerData = callback(oneData).map((kazanan) => { 
+	if(kazanan["Home Team Goals"] > kazanan["Away Team Goals"] ){
+		 ulkelerDizi.push(kazanan["Home Team Name"]);
+	} else if(kazanan["Home Team Goals"] < kazanan["Away Team Goals"] ) { 
+		ulkelerDizi.push(kazanan["Away Team Name"]); 
 }
-
+});
+return ulkelerDizi;
+}
+console.log(Kazananlar(fifaData,Finaller));
 
 
 /*  Görev 5: 
